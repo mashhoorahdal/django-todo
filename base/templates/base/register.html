@@ -1,0 +1,19 @@
+{% extends "base/main.html" %}
+{% block content %}
+
+<div class="bg-white p-8 rounded shadow-md max-w-md mx-auto">
+    <h1 class="text-4xl font-extrabold mb-6 text-blue-600">Register</h1>
+
+    <form method="POST" class="mb-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300 ease-in-out focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+            Register
+        </button>
+    </form>
+
+    <p class="text-gray-700">Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a></p>
+</div>
+
+{% endblock content %}

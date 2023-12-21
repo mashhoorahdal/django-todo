@@ -1,0 +1,52 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<div class="bg-white p-8 rounded shadow-md max-w-2xl mx-auto ">
+    {% if request.user.is_authenticated %}
+        <p class="text-lg text-gray-700">Welcome, {{ request.user }}</p>
+        <a href="{% url "logout" %}" class="text-blue-500 hover:underline cursor-pointer  hover:transform hover:translate-x-6  transition-transform duration-300 ease-in">Logout</a>
+    {% else %}
+        <a href="{% url "login" %}" class="text-blue-500 hover:underline hover:translate-x-2">Login</a>
+    {% endif %}
+
+    <hr class="my-6">
+
+    <h1 class="text-3xl font-bold mb-6 text-blue-600">My Todo App</h1>
+    <a href="{% url 'task-create' %}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300 ease-in-out">Create</a>
+
+    <form method='GET' class="mt-4">
+        <input type='text' name='search-area' value="{{ search_input }}" class='text-base font-medium text-gray-800 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors duration-300 ease-in-out'>
+
+        <input type='submit' value='Search' class='bg-blue-500 text-white py-2 px-4 rounded-full inline-flex items-center justify-center text-base font-medium hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+    </form>
+
+    <table class='table-fixed mt-8 w-full'>
+        <thead>
+            <tr>
+                <th class="text-left py-2">Item:</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td class="py-2">{{ task.title }}</td>
+                    <td><a href="{% url "task" task.id %}" class="text-blue-500 hover:underline">View</a></td>
+                    <td><a href="{% url "task-update" task.id %}" class="text-blue-500 hover:underline">Edit</a></td>
+                    <td><a href="{% url "task-delete" task.id %}" class="text-red-500 hover:underline">Delete</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <h3>No Items In List</h3>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

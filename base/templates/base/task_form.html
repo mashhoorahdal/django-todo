@@ -1,0 +1,25 @@
+{% extends "base/main.html" %}
+{% block content %}
+
+<div class="bg-white p-8 rounded shadow-md max-w-2xl mx-auto">
+    <h3 class="text-3xl font-bold mb-4 text-blue-600">Edit Task</h3>
+    <a href="{% url 'tasks' %}" class="text-blue-500 hover:underline transition-opacity duration-1 ease-in-out">Go back</a>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-4">
+            <label for="id_title" class="block text-sm font-medium text-gray-600">Title:</label>
+            <input type="text" id="id_title" name="title" value="{{ task.title }}" class="mt-1 p-2 border border-gray-300 rounded w-full">
+        </div>
+
+        <div class="mb-4">
+            <label for="id_description" class="block text-sm font-medium text-gray-600">Description:</label>
+            <textarea id="id_description" name="description" class="mt-1 p-2 border border-gray-300 rounded w-full">{{ task.description }}</textarea>
+        </div>
+
+        <input type="submit" value="Update" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+    </form>
+</div>
+
+{% endblock content %}
