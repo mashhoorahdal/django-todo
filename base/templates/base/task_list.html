@@ -2,18 +2,17 @@
 
 {% block content %}
 
-<div class="bg-white p-8 rounded shadow-md max-w-2xl mx-auto ">
+<div class="bg-white p-8 rounded shadow-md max-w-2xl mx-auto relative">
     {% if request.user.is_authenticated %}
-        <p class="text-lg text-gray-700">Welcome, {{ request.user }}</p>
-        <a href="{% url "logout" %}" class="text-blue-500 hover:underline cursor-pointer  hover:transform hover:translate-x-6  transition-transform duration-300 ease-in">Logout</a>
+        <p class="text-lg text-gray-700">Welcome, <b class='text-zinc-900'>{{ request.user }}</b></p>
+        <p class='text-sm my-2'>You have <i class='text-red-700'>{{count}}</i> itemtask{{count|pluralize:'s'}} incompleted</p>
+        <a href="{% url "logout" %}" class="text-blue-500 hover:underline cursor-pointer absolute top-0 right-2 py-7">Logout</a>
     {% else %}
         <a href="{% url "login" %}" class="text-blue-500 hover:underline hover:translate-x-2">Login</a>
     {% endif %}
-
-    <hr class="my-6">
-
-    <h1 class="text-3xl font-bold mb-6 text-blue-600">My Todo App</h1>
-    <a href="{% url 'task-create' %}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300 ease-in-out">Create</a>
+</div>
+<div class="rounded shadow-md max-w-2xl mx-auto relative">
+    <a href="{% url 'task-create' %}" class="bg-blue-500 text-white absolute top-1 right-2 py-0.5  px-4 rounded hover:bg-blue-600 transition-colors duration-300 ease-in-out text-3xl ">&#43;</a>
 
     <form method='GET' class="mt-4">
         <input type='text' name='search-area' value="{{ search_input }}" class='text-base font-medium text-gray-800 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 transition-colors duration-300 ease-in-out'>
@@ -32,6 +31,7 @@
         </thead>
         <tbody>
             {% for task in tasks %}
+                
                 <tr>
                     <td class="py-2">{{ task.title }}</td>
                     <td><a href="{% url "task" task.id %}" class="text-blue-500 hover:underline">View</a></td>
