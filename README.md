@@ -1,6 +1,6 @@
 # Task Management System
 
-Task Management System is a Django web application that allows users to manage their tasks efficiently. It utilizes the Django framework along with Tailwind CSS for styling.
+Task Management System is a Django web application that allows users to manage their tasks efficiently. It utilizes the Django framework along with Tailwind CSS .
 
 | Section                      | Images |
 | ----------------------------- | ------------------------------------------- |
